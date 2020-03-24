@@ -30,14 +30,14 @@ final class StopwatchViewController: UIViewController {
     
     // MARK: Subviews
     private lazy var leftButton: StopwatchButton = {
-        let btn = StopwatchButton(viewModel: .make(for: self.stopwatch.state.value, position: .left))
+        let btn = StopwatchButton(viewModel: .make(for: self.stopwatch.time.state, position: .left))
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(didTapLeft), for: .touchUpInside)
         return btn
     }()
     
     private lazy var rightButton: StopwatchButton = {
-        let btn = StopwatchButton(viewModel: .make(for: self.stopwatch.state.value, position: .right))
+        let btn = StopwatchButton(viewModel: .make(for: self.stopwatch.time.state, position: .right))
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(didTapRight), for: .touchUpInside)
         return btn
@@ -69,13 +69,13 @@ final class StopwatchViewController: UIViewController {
 private extension StopwatchViewController {
     
     func configureSubscriptions() {
-        bind(stopwatch.state, to: .left, button: leftButton)
-        bind(stopwatch.state, to: .right, button: rightButton)
+        bind(stopwatch.$time, to: .left, button: leftButton)
+        bind(stopwatch.$time, to: .right, button: rightButton)
     }
     
-    func bind(_ state: CurrentValueSubject<Stopwatch.State, Never>, to position: StopwatchButton.Position, button: StopwatchButton) {
-        state
-            .map { StopwatchButton.ViewModel.make(for: $0, position: position) }
+    func bind(_ time: Published<Stopwatch.Time>.Publisher, to position: StopwatchButton.Position, button: StopwatchButton) {
+        time
+            .map { StopwatchButton.ViewModel.make(for: $0.state, position: position) }
             .assign(to: \.viewModel, on: button)
             .store(in: &subscriptions)
     }
