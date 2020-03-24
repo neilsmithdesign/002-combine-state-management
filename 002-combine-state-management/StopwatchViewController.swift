@@ -28,6 +28,15 @@ final class StopwatchViewController: UIViewController {
     private var subscriptions: Set<AnyCancellable> = .init()
     
     
+    // MARK: Formatter
+    private let timeFormatter: DateComponentsFormatter = {
+        let f = DateComponentsFormatter()
+        f.allowedUnits = [.minute, .second]
+        f.zeroFormattingBehavior = .pad
+        return f
+    }()
+    
+    
     // MARK: Subviews
     private lazy var leftButton: StopwatchButton = {
         let btn = StopwatchButton(viewModel: .make(for: self.stopwatch.time.state, position: .left))
@@ -41,6 +50,15 @@ final class StopwatchViewController: UIViewController {
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.addTarget(self, action: #selector(didTapRight), for: .touchUpInside)
         return btn
+    }()
+    
+    private lazy var timeLabel: UILabel = {
+        let l = UILabel()
+        l.translatesAutoresizingMaskIntoConstraints = false
+        l.font = .systemFont(ofSize: 64, weight: .thin)
+        l.textColor = .label
+        l.textAlignment = .center
+        return l
     }()
     
     private lazy var buttonStackView: UIStackView = {
@@ -71,6 +89,10 @@ private extension StopwatchViewController {
     func configureSubscriptions() {
         bind(stopwatch.$time, to: .left, button: leftButton)
         bind(stopwatch.$time, to: .right, button: rightButton)
+        stopwatch.$time
+            .map { self.formattedTime(from: $0.total) }
+            .assign(to: \.text, on: timeLabel)
+            .store(in: &subscriptions)
     }
     
     func bind(_ time: Published<Stopwatch.Time>.Publisher, to position: StopwatchButton.Position, button: StopwatchButton) {
@@ -78,6 +100,10 @@ private extension StopwatchViewController {
             .map { StopwatchButton.ViewModel.make(for: $0.state, position: position) }
             .assign(to: \.viewModel, on: button)
             .store(in: &subscriptions)
+    }
+    
+    func formattedTime(from time: TimeInterval) -> String {
+        timeFormatter.string(from: time) ?? "-"
     }
     
 }
@@ -107,6 +133,11 @@ private extension StopwatchViewController {
         buttonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
         buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
         buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        view.addSubview(timeLabel)
+        timeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        timeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        timeLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        timeLabel.bottomAnchor.constraint(equalTo: buttonStackView.topAnchor).isActive = true
     }
 
     func constrain(_ button: StopwatchButton) {
