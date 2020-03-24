@@ -29,12 +29,7 @@ final class StopwatchViewController: UIViewController {
     
     
     // MARK: Formatter
-    private let timeFormatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.allowedUnits = [.minute, .second]
-        f.zeroFormattingBehavior = .pad
-        return f
-    }()
+    private let timeFormatter: TimeFormatter = .init()
     
     
     // MARK: Subviews
@@ -90,7 +85,7 @@ private extension StopwatchViewController {
         bind(stopwatch.$time, to: .left, button: leftButton)
         bind(stopwatch.$time, to: .right, button: rightButton)
         stopwatch.$time
-            .map { self.formattedTime(from: $0.total) }
+            .map { self.timeFormatter.string(for: $0.total) }
             .assign(to: \.text, on: timeLabel)
             .store(in: &subscriptions)
     }
@@ -101,11 +96,7 @@ private extension StopwatchViewController {
             .assign(to: \.viewModel, on: button)
             .store(in: &subscriptions)
     }
-    
-    func formattedTime(from time: TimeInterval) -> String {
-        timeFormatter.string(from: time) ?? "-"
-    }
-    
+
 }
 
 
@@ -130,9 +121,9 @@ private extension StopwatchViewController {
         view.addSubview(buttonStackView)
         constrain(leftButton)
         constrain(rightButton)
-        buttonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
-        buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
+        buttonStackView.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor).isActive = true
+        buttonStackView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 24).isActive = true
+        buttonStackView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -24).isActive = true
         view.addSubview(timeLabel)
         timeLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
         timeLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
@@ -144,5 +135,32 @@ private extension StopwatchViewController {
         button.heightAnchor.constraint(equalToConstant: 88).isActive = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
     }
+    
+}
+
+
+struct TimeFormatter {
+    
+    func string(for time: TimeInterval) -> String {
+        let ms = millisecondsFormatter.string(from: NSNumber(value: time.truncatingRemainder(dividingBy: 1))) ?? "-"
+        let mm_ss = minutesSecondsFormatter.string(from: time) ?? "-"
+        return mm_ss + ms
+    }
+    
+    private let minutesSecondsFormatter: DateComponentsFormatter = {
+        let f = DateComponentsFormatter()
+        f.allowedUnits = [.minute, .second]
+        f.zeroFormattingBehavior = .pad
+        return f
+    }()
+    
+    private let millisecondsFormatter: NumberFormatter = {
+        let f = NumberFormatter()
+        f.minimumFractionDigits = 2
+        f.maximumFractionDigits = 2
+        f.maximumIntegerDigits  = 0
+        f.alwaysShowsDecimalSeparator = true
+        return f
+    }()
     
 }
