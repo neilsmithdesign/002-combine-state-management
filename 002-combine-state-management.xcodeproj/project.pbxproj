@@ -9,23 +9,25 @@
 /* Begin PBXBuildFile section */
 		8C052A15242A298700CDBC62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A14242A298700CDBC62 /* AppDelegate.swift */; };
 		8C052A17242A298700CDBC62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A16242A298700CDBC62 /* SceneDelegate.swift */; };
-		8C052A19242A298700CDBC62 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A18242A298700CDBC62 /* ContentView.swift */; };
 		8C052A1B242A298B00CDBC62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C052A1A242A298B00CDBC62 /* Assets.xcassets */; };
 		8C052A1E242A298B00CDBC62 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C052A1D242A298B00CDBC62 /* Preview Assets.xcassets */; };
 		8C052A21242A298B00CDBC62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C052A1F242A298B00CDBC62 /* LaunchScreen.storyboard */; };
 		8C052A29242A2A6C00CDBC62 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A28242A2A6C00CDBC62 /* Stopwatch.swift */; };
+		8C052A2B242A2F6D00CDBC62 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A2A242A2F6D00CDBC62 /* StopwatchViewController.swift */; };
+		8C052A2D242A358F00CDBC62 /* StopwatchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A2C242A358F00CDBC62 /* StopwatchButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8C052A11242A298700CDBC62 /* 002-combine-state-management.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "002-combine-state-management.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C052A14242A298700CDBC62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8C052A16242A298700CDBC62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8C052A18242A298700CDBC62 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		8C052A1A242A298B00CDBC62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C052A1D242A298B00CDBC62 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8C052A20242A298B00CDBC62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C052A22242A298B00CDBC62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C052A28242A2A6C00CDBC62 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
+		8C052A2A242A2F6D00CDBC62 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
+		8C052A2C242A358F00CDBC62 /* StopwatchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,8 +62,9 @@
 			children = (
 				8C052A14242A298700CDBC62 /* AppDelegate.swift */,
 				8C052A16242A298700CDBC62 /* SceneDelegate.swift */,
-				8C052A18242A298700CDBC62 /* ContentView.swift */,
 				8C052A28242A2A6C00CDBC62 /* Stopwatch.swift */,
+				8C052A2A242A2F6D00CDBC62 /* StopwatchViewController.swift */,
+				8C052A2C242A358F00CDBC62 /* StopwatchButton.swift */,
 				8C052A1A242A298B00CDBC62 /* Assets.xcassets */,
 				8C052A1F242A298B00CDBC62 /* LaunchScreen.storyboard */,
 				8C052A22242A298B00CDBC62 /* Info.plist */,
@@ -151,8 +154,9 @@
 			files = (
 				8C052A15242A298700CDBC62 /* AppDelegate.swift in Sources */,
 				8C052A17242A298700CDBC62 /* SceneDelegate.swift in Sources */,
-				8C052A19242A298700CDBC62 /* ContentView.swift in Sources */,
+				8C052A2B242A2F6D00CDBC62 /* StopwatchViewController.swift in Sources */,
 				8C052A29242A2A6C00CDBC62 /* Stopwatch.swift in Sources */,
+				8C052A2D242A358F00CDBC62 /* StopwatchButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
