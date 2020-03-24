@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 final class StopwatchViewController: UIViewController {
     
@@ -24,6 +25,7 @@ final class StopwatchViewController: UIViewController {
     
     // MARK: Model
     private let stopwatch: Stopwatch
+    private var subscriptions: Set<AnyCancellable> = .init()
     
     
     // MARK: Subviews
@@ -57,10 +59,31 @@ final class StopwatchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildViewHierarchy()
+        configureSubscriptions()
     }
     
 }
 
+
+// MARK: Model observations
+private extension StopwatchViewController {
+    
+    func configureSubscriptions() {
+        bind(stopwatch.state, to: .left, button: leftButton)
+        bind(stopwatch.state, to: .right, button: rightButton)
+    }
+    
+    func bind(_ state: CurrentValueSubject<Stopwatch.State, Never>, to position: StopwatchButton.Position, button: StopwatchButton) {
+        state
+            .map { StopwatchButton.ViewModel.make(for: $0, position: position) }
+            .assign(to: \.viewModel, on: button)
+            .store(in: &subscriptions)
+    }
+    
+}
+
+
+// MARK: User Interactions
 private extension StopwatchViewController {
     
     @objc func didTapLeft() {
@@ -74,6 +97,7 @@ private extension StopwatchViewController {
 }
 
 
+// MARK: Layout
 private extension StopwatchViewController {
     
     func buildViewHierarchy() {
@@ -81,12 +105,12 @@ private extension StopwatchViewController {
         constrain(leftButton)
         constrain(rightButton)
         buttonStackView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
-        buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16).isActive = true
+        buttonStackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24).isActive = true
+        buttonStackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24).isActive = true
     }
 
     func constrain(_ button: StopwatchButton) {
-        button.heightAnchor.constraint(equalToConstant: 80).isActive = true
+        button.heightAnchor.constraint(equalToConstant: 88).isActive = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
     }
     

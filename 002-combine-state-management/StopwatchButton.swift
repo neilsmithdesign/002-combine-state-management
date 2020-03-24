@@ -18,7 +18,7 @@ final class StopwatchButton: UIButton {
     
     override var isEnabled: Bool {
         didSet {
-            alpha = isEnabled ? 1.0 : 0.4
+            setColors()
         }
     }
     
@@ -32,6 +32,7 @@ final class StopwatchButton: UIButton {
         self.viewModel = viewModel
         super.init(frame: .zero)
         configure()
+        setColors()
     }
     
     required init?(coder: NSCoder) {
@@ -45,8 +46,20 @@ final class StopwatchButton: UIButton {
     
     private func configure() {
         setTitle(viewModel.title, for: .normal)
-        backgroundColor = viewModel.color
         isEnabled = viewModel.isEnabled
+    }
+    
+    private func setColors() {
+        self.backgroundColor = currentBackgroundColor
+        self.setTitleColor(titleColor, for: .normal)
+    }
+    
+    private var currentBackgroundColor: UIColor {
+        isEnabled ? viewModel.color : viewModel.disbaledColor
+    }
+    
+    private var titleColor: UIColor {
+        isEnabled ? viewModel.titleColor : viewModel.disabledTitleColor
     }
     
 }
@@ -55,8 +68,12 @@ extension StopwatchButton {
     
     struct ViewModel {
         let title: String
-        let color: UIColor
         let isEnabled: Bool
+        let color: UIColor
+        
+        var disbaledColor: UIColor { color.withAlphaComponent(0.4) }
+        let titleColor: UIColor = .white
+        var disabledTitleColor: UIColor { titleColor.withAlphaComponent(0.4) }
     }
     
     enum Position {
@@ -69,16 +86,16 @@ extension StopwatchButton {
 extension StopwatchButton.ViewModel {
     
     static var start: Self {
-        .init(title: "Start", color: .systemGreen, isEnabled: true)
+        .init(title: "Start", isEnabled: true, color: .systemGreen)
     }
     static var stop: Self {
-        .init(title: "Stop", color: .systemRed, isEnabled: true)
+        .init(title: "Stop", isEnabled: true, color: .systemRed)
     }
     static func lap(isEnabled: Bool) -> Self {
-        .init(title: "Lap", color: .systemGray, isEnabled: isEnabled)
+        .init(title: "Lap", isEnabled: isEnabled, color: .systemGray)
     }
     static var reset: Self {
-        .init(title: "Reset", color: .systemGray, isEnabled: true)
+        .init(title: "Reset", isEnabled: true, color: .systemGray)
     }
     
 }
