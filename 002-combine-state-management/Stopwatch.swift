@@ -57,7 +57,7 @@ extension Stopwatch {
     }
     
     private func recordLap() {
-        print("To do: record lap")
+        print("Record lap here..")
     }
     
 }
@@ -66,19 +66,19 @@ extension Stopwatch {
     
     struct Time {
 
-        
         var total: TimeInterval {
-            if let start = intervalStart {
-                return previousIntervalTotals + current - start
-            } else {
-                return previousIntervalTotals
-            }
+            previousIntervalTotals + currentIntervalTotal
+        }
+        
+        private var currentIntervalTotal: TimeInterval {
+            guard let start = currentIntervalStart else { return 0 }
+            return now - start
         }
         
         var state: State {
             if total <= 0 {
                 return .inactive
-            } else if intervalStart == nil {
+            } else if currentIntervalStart == nil {
                 return .paused
             } else {
                 return .active
@@ -86,27 +86,27 @@ extension Stopwatch {
         }
         
         mutating func start(_ time: TimeInterval) {
-            intervalStart = time
-            current = time
+            currentIntervalStart = time
+            now = time
         }
         
         mutating func update(_ time: TimeInterval) {
-            current = time
+            now = time
         }
         
         mutating func pause() {
             previousIntervalTotals = total
-            intervalStart = nil
+            currentIntervalStart = nil
         }
         
         mutating func reset() {
-            current = 0
-            intervalStart = nil
+            now = 0
+            currentIntervalStart = nil
             previousIntervalTotals = 0
         }
 
-        private var current: TimeInterval = 0
-        private var intervalStart: TimeInterval?
+        private var now: TimeInterval = 0
+        private var currentIntervalStart: TimeInterval?
         private var previousIntervalTotals: TimeInterval = 0
         
     }

@@ -1,16 +1,7 @@
-//
-//  AppDelegate.swift
-//  002-combine-state-management
-//
-//  Created by Neil Smith on 24/03/2020.
-//  Copyright © 2020 Neil Smith Design LTD. All rights reserved.
-//
-
 import UIKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

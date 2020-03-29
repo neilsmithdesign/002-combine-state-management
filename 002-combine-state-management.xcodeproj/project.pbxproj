@@ -15,6 +15,9 @@
 		8C052A29242A2A6C00CDBC62 /* Stopwatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A28242A2A6C00CDBC62 /* Stopwatch.swift */; };
 		8C052A2B242A2F6D00CDBC62 /* StopwatchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A2A242A2F6D00CDBC62 /* StopwatchViewController.swift */; };
 		8C052A2D242A358F00CDBC62 /* StopwatchButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C052A2C242A358F00CDBC62 /* StopwatchButton.swift */; };
+		8C5CD2EE2430A1A40054B929 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 8C5CD2EC2430A1A40054B929 /* README.md */; };
+		8C5CD2EF2430A1A40054B929 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 8C5CD2ED2430A1A40054B929 /* LICENSE.md */; };
+		8C784EC324306EE7007A8492 /* TimeFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C784EC224306EE7007A8492 /* TimeFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		8C052A28242A2A6C00CDBC62 /* Stopwatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stopwatch.swift; sourceTree = "<group>"; };
 		8C052A2A242A2F6D00CDBC62 /* StopwatchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchViewController.swift; sourceTree = "<group>"; };
 		8C052A2C242A358F00CDBC62 /* StopwatchButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopwatchButton.swift; sourceTree = "<group>"; };
+		8C5CD2EC2430A1A40054B929 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		8C5CD2ED2430A1A40054B929 /* LICENSE.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		8C784EC224306EE7007A8492 /* TimeFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeFormatter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +50,8 @@
 		8C052A08242A298700CDBC62 = {
 			isa = PBXGroup;
 			children = (
+				8C5CD2ED2430A1A40054B929 /* LICENSE.md */,
+				8C5CD2EC2430A1A40054B929 /* README.md */,
 				8C052A13242A298700CDBC62 /* 002-combine-state-management */,
 				8C052A12242A298700CDBC62 /* Products */,
 			);
@@ -65,6 +73,7 @@
 				8C052A28242A2A6C00CDBC62 /* Stopwatch.swift */,
 				8C052A2A242A2F6D00CDBC62 /* StopwatchViewController.swift */,
 				8C052A2C242A358F00CDBC62 /* StopwatchButton.swift */,
+				8C784EC224306EE7007A8492 /* TimeFormatter.swift */,
 				8C052A1A242A298B00CDBC62 /* Assets.xcassets */,
 				8C052A1F242A298B00CDBC62 /* LaunchScreen.storyboard */,
 				8C052A22242A298B00CDBC62 /* Info.plist */,
@@ -139,8 +148,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5CD2EF2430A1A40054B929 /* LICENSE.md in Resources */,
 				8C052A21242A298B00CDBC62 /* LaunchScreen.storyboard in Resources */,
 				8C052A1E242A298B00CDBC62 /* Preview Assets.xcassets in Resources */,
+				8C5CD2EE2430A1A40054B929 /* README.md in Resources */,
 				8C052A1B242A298B00CDBC62 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -153,6 +164,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C052A15242A298700CDBC62 /* AppDelegate.swift in Sources */,
+				8C784EC324306EE7007A8492 /* TimeFormatter.swift in Sources */,
 				8C052A17242A298700CDBC62 /* SceneDelegate.swift in Sources */,
 				8C052A2B242A2F6D00CDBC62 /* StopwatchViewController.swift in Sources */,
 				8C052A29242A2A6C00CDBC62 /* Stopwatch.swift in Sources */,

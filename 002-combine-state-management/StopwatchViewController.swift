@@ -71,6 +71,7 @@ final class StopwatchViewController: UIViewController {
     // MARK: Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .systemBackground
         buildViewHierarchy()
         configureSubscriptions()
     }
@@ -90,7 +91,9 @@ private extension StopwatchViewController {
             .store(in: &subscriptions)
     }
     
-    func bind(_ time: Published<Stopwatch.Time>.Publisher, to position: StopwatchButton.Position, button: StopwatchButton) {
+    func bind(_ time: Published<Stopwatch.Time>.Publisher,
+              to position: StopwatchButton.Position,
+              button: StopwatchButton) {
         time
             .map { StopwatchButton.ViewModel.make(for: $0.state, position: position) }
             .assign(to: \.viewModel, on: button)
@@ -135,32 +138,5 @@ private extension StopwatchViewController {
         button.heightAnchor.constraint(equalToConstant: 88).isActive = true
         button.widthAnchor.constraint(equalTo: button.heightAnchor).isActive = true
     }
-    
-}
-
-
-struct TimeFormatter {
-    
-    func string(for time: TimeInterval) -> String {
-        let ms = millisecondsFormatter.string(from: NSNumber(value: time.truncatingRemainder(dividingBy: 1))) ?? "-"
-        let mm_ss = minutesSecondsFormatter.string(from: time) ?? "-"
-        return mm_ss + ms
-    }
-    
-    private let minutesSecondsFormatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.allowedUnits = [.minute, .second]
-        f.zeroFormattingBehavior = .pad
-        return f
-    }()
-    
-    private let millisecondsFormatter: NumberFormatter = {
-        let f = NumberFormatter()
-        f.minimumFractionDigits = 2
-        f.maximumFractionDigits = 2
-        f.maximumIntegerDigits  = 0
-        f.alwaysShowsDecimalSeparator = true
-        return f
-    }()
     
 }
