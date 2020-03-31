@@ -50,7 +50,7 @@ final class StopwatchViewController: UIViewController {
     private lazy var timeLabel: UILabel = {
         let l = UILabel()
         l.translatesAutoresizingMaskIntoConstraints = false
-        l.font = .systemFont(ofSize: 64, weight: .thin)
+        l.font = .monospacedDigitSystemFont(ofSize: 64, weight: .thin)
         l.textColor = .label
         l.textAlignment = .center
         return l
